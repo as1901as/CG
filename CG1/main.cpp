@@ -50,6 +50,8 @@ void DrawObject() {
     //}
     //glEnd();
 
+
+    // 그림판 만들기
     glColor3f(0, 0, 1);
     glPointSize(10.0);
     glBegin(GL_POINTS);
