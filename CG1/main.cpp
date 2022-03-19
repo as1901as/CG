@@ -1,4 +1,4 @@
-#include <stdio.h>
+Ôªø#include <stdio.h>
 #include <vector>
 #include "GL/freeglut.h"
 #include <math.h>
@@ -51,7 +51,8 @@ void DrawObject() {
     //glEnd();
 
 
-    // ±◊∏≤∆« ∏∏µÈ±‚
+    // Í∑∏Î¶ºÌåê ÎßåÎì§Í∏∞
+
     glColor3f(0, 0, 1);
     glPointSize(10.0);
     glBegin(GL_POINTS);
