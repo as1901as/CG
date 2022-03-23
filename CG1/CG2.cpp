@@ -1,4 +1,4 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <vector>
 #include "GL/freeglut.h"
 #include <math.h>
@@ -13,64 +13,33 @@ std::vector<pt> pts;
 void DrawObject() {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glLineWidth(3.0);
-
-    /*glColor3f(1, 0, 0);
-    glPointSize(10.0);
-    glBegin(GL_POINTS);
-    glVertex2d(a, b);
-    glEnd();*/
-
-    //glColor3f(1, 0, 0);
-    //glBegin(GL_TRIANGLES);
-    //glVertex2f(-1, 0);
-    //glVertex2f(0, 0);
-    //glVertex2f(-0.5, 1);
-    //glEnd();
-
-    //glColor3f(1, 1, 0);
-    //glBegin(GL_POLYGON);
-    //glVertex2i(0, 0);
-    //glVertex2i(1, 0); 
-    //glVertex2i(1, 1); 
-    //glVertex2i(0, 1); 
-    //glEnd();
-
-    //glColor3f(0, 1, 0);
-    //double radius = 1.0;
-    //glBegin(GL_POLYGON);
-    //glColor3f(0, 1, 0);
-    //double radius = 1;
-    //glBegin(GL_POLYGON);
-    //for (int i = 0; i <= arrowIdx; i++) {
-    //   double theta = PI * 2.0 * double(i) / double(arrowIdx);
-    //   double x = radius * cos(theta);
-    //   double y = radius * sin(theta);
-    //   glVertex2d(x, y);
-    //}
-    //glEnd();
-
-
-    // 그림판 만들기
-
+    glLoadIdentity();
+    glColor3f(1, 0, 0);
+    glScaled(1.0, 0.5, 1.0);
+    glRotatef(300, 0, 0, 1);
+    glTranslated(-0.8, 0, 0);
+    glutWireTeapot(0.3);
+    
+    glLoadIdentity();
+    glTranslated(0, 0, 0);
     glColor3f(0, 0, 1);
-    glPointSize(10.0);
-    glBegin(GL_POINTS);
-    for (auto& pt : pts)
-        glVertex2d(pt.x, pt.y);
-    glEnd();
-    glFlush();
+    glutWireTeacup(0.5);
+
+    glutSwapBuffers();
 }
 
+void Timer(int value) {
+    if (arrowIdx < 50)
+        arrowIdx++;
+    else
+        arrowIdx = 0;
+    glutTimerFunc(30, Timer, 1);
+}
 void KeyDown(unsigned char key, int x, int y)
 {
     switch (key) {
     case 'p': case 'P':
         printf("Hello world!\n");
-        break;
-
-    case 'r': case 'R':
-        pts.clear();
         break;
     }
     glutPostRedisplay();
@@ -94,7 +63,6 @@ void Mouse(int button, int state, int x, int y)
 
     glutPostRedisplay();
 }
-
 void Motion(int x, int y)
 {
     printf("Mouse motion (%d %d)\n", x, y);
@@ -104,11 +72,8 @@ void Motion(int x, int y)
     yd = y / 500.0 * 4.0 - 2.0;
     yd *= -1.0;
 
-    pts.push_back({ xd,yd });
-
     glutPostRedisplay();
 }
-
 void Init()
 {
     glViewport(0, 0, width, height);
@@ -119,7 +84,7 @@ void Init()
 }
 
 int main(int argc, char** argv) {
-    int mode = GLUT_RGB | GLUT_SINGLE;
+    int mode = GLUT_RGB | GLUT_DOUBLE;
 
     glutInit(&argc, argv);
     glutInitDisplayMode(mode);
@@ -135,5 +100,6 @@ int main(int argc, char** argv) {
     glutSpecialFunc(KeySpecial);
     glutMotionFunc(Motion);
     glutIdleFunc(DrawObject);
+    glutTimerFunc(1, Timer, 1);
     glutMainLoop();
 }
