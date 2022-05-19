@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="BezierCurve2d.cpp" />
     <ClCompile Include="CG1.cpp" />
+    <ClCompile Include="CG12.cpp" />
     <ClCompile Include="CG2.cpp" />
     <ClCompile Include="CG3.cpp" />
     <ClCompile Include="CG4.cpp" />
